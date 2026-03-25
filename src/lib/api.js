@@ -1,7 +1,7 @@
 // ローカルモック版 API（Supabase不要）
 // 本番環境では元のコードに戻してください
 
-const MOCK_MODE = true
+const MOCK_MODE = false
 
 // ── モックデータ（メモリ内） ─────────────────────────────────
 const mockChildren = [
