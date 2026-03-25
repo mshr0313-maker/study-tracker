@@ -18,7 +18,7 @@ export default function ParentView({ showToast }) {
   const [children,  setChildren]  = useState([])
   const [records,   setRecords]   = useState([])
   const [stats,     setStats]     = useState(null)
-  const [filterChild, setFilter]  = useState('1')
+  const [filterChild, setFilter]  = useState('all')
   const [loading,   setLoading]   = useState(true)
   const [chartPeriod, setChartPeriod] = useState('week') // 'week' or 'month'
   const [weekOffset, setWeekOffset] = useState(0) // 0=今週, 1=先週, 2=2週前, 3=3週前
