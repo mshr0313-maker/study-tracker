@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学習記録アプリ 使い方ガイド</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
+    .header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .header p {
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    }
+    .card h2 {
+      color: #2c3e50;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #3498db;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card h2 .emoji {
+      font-size: 1.3rem;
+    }
+    .card h3 {
+      color: #3498db;
+      font-size: 0.95rem;
+      margin: 1rem 0 0.5rem;
+    }
+    .card p, .card li {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.7;
+    }
+    .card ul {
+      padding-left: 1.2rem;
+      margin: 0.5rem 0;
+    }
+    .card ol {
+      padding-left: 1.2rem;
+      margin: 0.5rem 0;
+    }
+    .card ol li {
+      margin-bottom: 0.3rem;
+    }
+    .password-box {
+      display: inline-block;
+      background: linear-gradient(135deg, #3498db, #2c3e50);
+      color: #fff;
+      padding: 0.5rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 0.2rem;
+      margin: 0.3rem 0;
+    }
+    .password-box.danger {
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.8rem 0;
+    }
+    th, td {
+      padding: 0.7rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9rem;
+    }
+    th {
+      background: #f8f9fa;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+    .highlight-box {
+      background: #e8f4fd;
+      border-left: 4px solid #3498db;
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+      margin: 0.8rem 0;
+    }
+    .highlight-box.warning {
+      background: #fdf2e9;
+      border-left-color: #e67e22;
+    }
+    .highlight-box.success {
+      background: #e9f7ef;
+      border-left-color: #27ae60;
+    }
+    .highlight-box p {
+      margin: 0;
+    }
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+    }
+    .tab {
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      background: #eee;
+      color: #666;
+    }
+    .tab.active {
+      background: #3498db;
+      color: #fff;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+      margin: 0.8rem 0;
+    }
+    .feature-item {
+      background: #f8f9fa;
+      padding: 0.8rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .feature-item .label {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 0.2rem;
+    }
+    .feature-item .value {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    .author-tags {
+      display: flex;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+    }
+    .author-tag {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      background: #3498db;
+      color: #fff;
+    }
+    .papa-note {
+      background: #fff8e1;
+      border-left: 4px solid #ffc107;
+      padding: 1rem;
+      border-radius: 0 8px 8px 0;
+      margin: 0.8rem 0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>学習記録アプリの使い方</h1>
+      <p>りんちゃんとゆいちゃんの勉強管理用に作ったよ</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">🔐</span>ログインについて</h2>
+      <p>アプリを開いたらまずパスワードを入れてね</p>
+      <div class="password-box">0311</div>
+      <div class="papa-note">
+        💡 子どもたちにも同じパスワードを教えてあるから、自分たちで記録できるよ。
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">📱</span>画面の切り替え</h2>
+      <p>上の方にタブがあって、2つの画面を切り替えられるようになってるよ</p>
+      <div class="tabs">
+        <span class="tab active">子ども画面</span>
+        <span class="tab">がんばった記録</span>
+      </div>
+      <ul style="margin-top: 0.8rem;">
+        <li><strong>子ども画面</strong> → りんちゃんとゆいちゃんが勉強を記録するところ</li>
+        <li><strong>がんばった記録</strong> → 二人の頑張りを確認できるところ。グラフとかも見られるよ</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">📊</span>「がんばった記録」画面の見方</h2>
+
+      <h3>子どもの切り替え</h3>
+      <p>りんちゃん・ゆいちゃん・すべての3つで切り替えできるよ</p>
+      <div class="tabs">
+        <span class="tab active">りんちゃん</span>
+        <span class="tab">ゆいちゃん</span>
+        <span class="tab">すべて</span>
+      </div>
+
+      <h3>連続記録バッジ</h3>
+      <p>毎日記録してると「○日連続で記録中！」って表示されるよ。子どものモチベーションになるかなと思って</p>
+      <div class="highlight-box success">
+        <p>🔥 ○日連続で記録中！</p>
+      </div>
+
+      <h3>統計カード</h3>
+      <p>今日・今週・今月・合計がパッと見でわかるようになってるよ</p>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="label">今日</div>
+          <div class="value">○○分</div>
+        </div>
+        <div class="feature-item">
+          <div class="label">今週</div>
+          <div class="value">○○分</div>
+        </div>
+        <div class="feature-item">
+          <div class="label">今月</div>
+          <div class="value">○○分</div>
+        </div>
+        <div class="feature-item">
+          <div class="label">合計</div>
+          <div class="value">○○件</div>
+        </div>
+      </div>
+
+      <h3>グラフについて</h3>
+      <p>期間を切り替えて見られるようにしてあるよ</p>
+      <div class="tabs" style="flex-wrap: wrap;">
+        <span class="tab active">今週</span>
+        <span class="tab">先週</span>
+        <span class="tab">2週前</span>
+        <span class="tab">3週前</span>
+        <span class="tab">今月</span>
+      </div>
+      <ul style="margin-top: 0.8rem;">
+        <li><strong>曜日別グラフ</strong> - 何曜日にどれくらい勉強したかがわかるよ</li>
+        <li><strong>科目別グラフ</strong> - どの教科をよく勉強してるかわかる。合計時間と1日平均も出るよ</li>
+        <li><strong>種類別グラフ</strong> - 宿題・復習・予習のバランスが見られるよ</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">🎯</span>1日の目標について</h2>
+      <p>目標時間は自動で設定されるようにしてあるよ</p>
+      <table>
+        <tr>
+          <th>いつ</th>
+          <th>目標時間</th>
+        </tr>
+        <tr>
+          <td>平日</td>
+          <td><strong>90分</strong></td>
+        </tr>
+        <tr>
+          <td>土日</td>
+          <td><strong>2時間</strong></td>
+        </tr>
+        <tr>
+          <td>長期休み</td>
+          <td><strong>3時間</strong></td>
+        </tr>
+      </table>
+      <div class="highlight-box success">
+        <p>🎉 目標達成したら「達成！」って表示されるよ</p>
+      </div>
+      <div class="papa-note">
+        ちょっと厳しいかな？と思ったら相談してね。調整できるから。
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">💬</span>コメントの書き方</h2>
+      <p>子どもたちの記録に励ましのコメントを残せるよ！たまに見てコメントしてあげてね</p>
+      <ol>
+        <li>記録カードの「💬 コメントする」を押す</li>
+        <li>名前を選ぶ（お母さん・パパ・おばあちゃんから選べるよ）</li>
+        <li>コメント書いて送信！</li>
+      </ol>
+      <p style="margin-top: 0.5rem;"><strong>選べる名前：</strong></p>
+      <div class="author-tags">
+        <span class="author-tag">パパ</span>
+        <span class="author-tag">お母さん</span>
+        <span class="author-tag">おばあちゃん</span>
+      </div>
+      <div class="papa-note">
+        「頑張ったね！」とか「すごいね！」とか、短くてもいいからコメントしてあげると子どもたち喜ぶと思うよ。
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">🗑️</span>記録の削除について</h2>
+      <p>間違えて登録しちゃった時は削除できるよ。ただ、子どもたちが勝手に消さないようにパスワードかけてあるからね</p>
+      <ol>
+        <li>「🗑 記録を削除」を押す</li>
+        <li>パスワードを入れる</li>
+        <li>削除完了</li>
+      </ol>
+      <p style="margin-top: 0.5rem;"><strong>削除用パスワード：</strong></p>
+      <div class="password-box danger">1014</div>
+      <div class="highlight-box warning" style="margin-top: 0.8rem;">
+        <p>⚠️ このパスワードは子どもたちには教えないでね！</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">🏖️</span>長期休みの設定</h2>
+      <p>夏休みとか冬休みの期間は設定できるようにしてあるよ。学校によって違うからね</p>
+      <table>
+        <tr>
+          <th>休み</th>
+          <th>初期設定</th>
+        </tr>
+        <tr>
+          <td>春休み</td>
+          <td>3月25日〜4月7日</td>
+        </tr>
+        <tr>
+          <td>夏休み</td>
+          <td>7月20日〜8月31日</td>
+        </tr>
+        <tr>
+          <td>冬休み</td>
+          <td>12月25日〜1月7日</td>
+        </tr>
+      </table>
+      <p style="margin-top: 0.5rem; color: #888; font-size: 0.85rem;">画面の下の方に「長期休み設定」ってあるから、そこで変更できるよ</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">🔔</span>通知設定</h2>
+      <p>「今日の勉強まだ記録してないよ〜」ってリマインダー通知を設定できるよ</p>
+      <ol>
+        <li>「通知設定」でリマインダーをONにする</li>
+        <li>通知してほしい時刻を設定（18時とか）</li>
+        <li>「テスト通知」で動くか確認できるよ</li>
+      </ol>
+      <div class="highlight-box warning">
+        <p>⚠️ ブラウザ開いてる時だけ動くから、完璧じゃないけどね…</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">❓</span>困った時は</h2>
+      <ul>
+        <li><strong>動きがおかしい時</strong> → ブラウザをリロード（更新ボタン）してみて</li>
+        <li><strong>データ消えた？</strong> → ブラウザのキャッシュクリアすると消えちゃうから注意してね</li>
+        <li><strong>他に何かあったら</strong> → 僕に言ってくれたら直すよ！</li>
+      </ul>
+    </div>
+
+    <div class="card" style="background: linear-gradient(135deg, #667eea, #764ba2); color: #fff;">
+      <h2 style="color: #fff; border-bottom-color: rgba(255,255,255,0.3);"><span class="emoji">💝</span>最後に</h2>
+      <p style="color: rgba(255,255,255,0.9);">
+        りんちゃんとゆいちゃんが毎日どれくらい頑張ってるか、これで見えるようになるから、たまに見てあげてね。
+        コメントとかしてくれると子どもたちも喜ぶと思うよ！
+      </p>
+      <p style="color: rgba(255,255,255,0.9); margin-top: 1rem;">
+        何かわからないことあったらいつでも聞いて！
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>

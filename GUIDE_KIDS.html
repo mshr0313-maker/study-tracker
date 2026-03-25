@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使い方ガイド - りんちゃん・ゆいちゃん</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
+    .header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .header p {
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    .card h2 {
+      color: #667eea;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card h2 .emoji {
+      font-size: 1.4rem;
+    }
+    .step {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .step-content h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+      color: #333;
+    }
+    .step-content p, .step-content ul {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.6;
+    }
+    .step-content ul {
+      padding-left: 1.2rem;
+      margin-top: 0.3rem;
+    }
+    .password-box {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 0.3rem;
+      margin: 0.5rem 0;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .tag {
+      background: #f0f0f0;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #555;
+    }
+    .tag.highlight {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    th, td {
+      padding: 0.6rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9rem;
+    }
+    th {
+      color: #667eea;
+      font-weight: 600;
+    }
+    .timer-btns {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .timer-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      border: none;
+    }
+    .timer-btn.start { background: #667eea; color: #fff; }
+    .timer-btn.stop { background: #f5576c; color: #fff; }
+    .timer-btn.reset { background: #eee; color: #666; }
+    .success-box {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      color: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    .success-box .emoji {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .papa-message {
+      background: #fff8e1;
+      border-left: 4px solid #ffc107;
+      padding: 1rem;
+      border-radius: 0 12px 12px 0;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>りんちゃん・ゆいちゃんへ</h1>
+      <p>パパが作った学習記録アプリの使い方だよ</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">🔐</span>まずログインしてね</h2>
+      <p style="margin-bottom: 0.5rem; color: #666;">パスワードはこれだよ！忘れないでね</p>
+      <div class="password-box">0311</div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">📝</span>勉強したら記録しよう</h2>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>まず自分の名前を選んでね</h3>
+          <p>「だれの記録？」ってところから選べるよ</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>どの教科を勉強したか選んでね</h3>
+          <div class="tag-list">
+            <span class="tag">国語</span>
+            <span class="tag">数学</span>
+            <span class="tag">理科</span>
+            <span class="tag">社会</span>
+            <span class="tag">英語</span>
+            <span class="tag">音楽</span>
+            <span class="tag">美術</span>
+            <span class="tag">体育</span>
+            <span class="tag">その他</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>どんな勉強か選んでね</h3>
+          <div class="tag-list">
+            <span class="tag highlight">宿題</span>
+            <span class="tag highlight">復習</span>
+            <span class="tag highlight">予習</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>何をやったか書いてね</h3>
+          <p>例えばこんな感じで書けばOK！</p>
+          <ul>
+            <li>漢字ドリル 10ページ</li>
+            <li>数学ワーク P.45〜50</li>
+            <li>英単語 50個暗記</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h3>メモは書いても書かなくてもOK</h3>
+          <p>感想とか、頑張ったこととか、自由に書いてね</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">⏱️</span>タイマーも使えるよ</h2>
+      <p style="color: #666; margin-bottom: 0.5rem;">勉強の時間を測れるから、ぜひ使ってみて！</p>
+      <div class="timer-btns">
+        <span class="timer-btn start">▶ スタート</span>
+        <span class="timer-btn stop">⏹ ストップ</span>
+        <span class="timer-btn reset">↺ リセット</span>
+      </div>
+      <div class="papa-message">
+        💡 勉強始めるときにスタートを押して、終わったらストップを押してね。そしたら自動で時間が記録されるよ！
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">📷</span>写真も残せるよ</h2>
+      <p style="color: #666;">ノートとかプリントの写真を撮って残しておけるよ。あとで見返すときに便利だよね！</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">💾</span>最後に保存を忘れずに！</h2>
+      <div class="success-box">
+        <span class="emoji">🎉</span>
+        「この内容で記録する」を押したら完了！<br>紙吹雪が出るよ！
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="emoji">🎯</span>毎日の目標時間</h2>
+      <p style="color: #666; margin-bottom: 0.5rem;">画面の上のほうに今日の目標時間が出てるよ</p>
+      <table>
+        <tr>
+          <th>いつ</th>
+          <th>目標</th>
+        </tr>
+        <tr>
+          <td>平日（学校ある日）</td>
+          <td><strong>90分</strong></td>
+        </tr>
+        <tr>
+          <td>土日</td>
+          <td><strong>2時間</strong></td>
+        </tr>
+        <tr>
+          <td>夏休みとか冬休み</td>
+          <td><strong>3時間</strong></td>
+        </tr>
+      </table>
+      <div class="papa-message">
+        💪 目標達成したら「達成！」って出るよ！毎日コツコツ頑張ろう！パパは二人の頑張りをいつも見てるからね。
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
