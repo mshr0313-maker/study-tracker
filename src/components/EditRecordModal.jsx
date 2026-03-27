@@ -1,6 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const SUBJECTS = ['国語', '算数・数学', '理科', '社会', '英語', 'その他']
+
+function calcDiff(start, end) {
+  if (!start || !end) return 0
+  const [sh, sm] = start.split(':').map(Number)
+  const [eh, em] = end.split(':').map(Number)
+  let diff = (eh * 60 + em) - (sh * 60 + sm)
+  if (diff < 0) diff += 24 * 60
+  return diff
+}
 
 export default function EditRecordModal({ record, onClose, onSave }) {
   const [subject, setSubject] = useState(record.subject || '')
@@ -10,6 +19,13 @@ export default function EditRecordModal({ record, onClose, onSave }) {
   const [endTime, setEndTime] = useState(record.end_time || '')
   const [durationMin, setDurationMin] = useState(record.duration_min || 0)
   const [saving, setSaving] = useState(false)
+
+  // 開始・終了時刻が変更されたら自動計算
+  useEffect(() => {
+    if (startTime && endTime) {
+      setDurationMin(calcDiff(startTime, endTime))
+    }
+  }, [startTime, endTime])
 
   const handleSave = async () => {
     if (!subject || !content) {
@@ -115,14 +131,21 @@ export default function EditRecordModal({ record, onClose, onSave }) {
         </div>
 
         <div className="field">
-          <label>学習時間（分）</label>
+          <label>学習時間（分）{startTime && endTime && ' - 自動計算'}</label>
           <input
             type="number"
             value={durationMin}
             onChange={e => setDurationMin(e.target.value)}
             min="0"
             placeholder="例: 30"
+            readOnly={!!(startTime && endTime)}
+            style={{ backgroundColor: startTime && endTime ? '#f5f5f5' : 'white' }}
           />
+          {startTime && endTime && (
+            <small style={{ color: 'var(--muted)', fontSize: 12, marginTop: 4 }}>
+              開始・終了時刻から自動計算されています
+            </small>
+          )}
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
