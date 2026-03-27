@@ -83,6 +83,7 @@ export default function ChildView({ showToast, triggerConfetti }) {
   const handleSave = async () => {
     if (!childId)  return showToast('子どもを選んでください')
     if (!subject)  return showToast('教科を選択してください')
+    if (!studyType) return showToast('宿題・復習・予習を選択してください')
     if (!content.trim()) return showToast('内容を入力してください')
 
     setSaving(true)

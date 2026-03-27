@@ -10,7 +10,7 @@ const AVATAR_COLORS = [
   ['#fdf0d5','#8a5800'], ['#f0eeff','#5033b0'],
 ]
 
-export default function RecordCard({ record, childIndex, onDeleted, showToast }) {
+export default function RecordCard({ record, childIndex, onDeleted, onEdited, showToast }) {
   const [comments, setComments]     = useState(record.comments || [])
   const [commentAuthor, setAuthor]  = useState('パパ')
   const [commentBody,   setBody]    = useState('')
@@ -113,10 +113,13 @@ export default function RecordCard({ record, childIndex, onDeleted, showToast })
         </div>
       )}
 
-      {/* コメント追加 */}
+      {/* アクションボタン */}
       <div style={{ marginTop: 10, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         <button className="btn btn-sm" onClick={() => setShowCmt(v => !v)}>
           {showComment ? 'とじる' : '💬 コメントする'}
+        </button>
+        <button className="btn btn-sm" onClick={() => onEdited(record)}>
+          ✏️ 編集
         </button>
         <button className="btn btn-sm btn-danger" disabled={deleting} onClick={handleDelRecord}>
           {deleting ? '削除中...' : '🗑 記録を削除'}

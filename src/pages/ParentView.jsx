@@ -4,10 +4,11 @@ import {
   Chart as ChartJS, CategoryScale, LinearScale, BarElement,
   ArcElement, Tooltip, Legend,
 } from 'chart.js'
-import { getChildren, getRecords, getStats, getGoal, getTodayGoalType, getVacations, setVacations, getStreak } from '../lib/api'
+import { getChildren, getRecords, getStats, getGoal, getTodayGoalType, getVacations, setVacations, getStreak, updateRecord } from '../lib/api'
 import RecordCard from '../components/RecordCard'
 import NotificationSettings from '../components/NotificationSettings'
 import VacationSettings from '../components/VacationSettings'
+import EditRecordModal from '../components/EditRecordModal'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend)
 
@@ -26,6 +27,7 @@ export default function ParentView({ showToast }) {
     const now = new Date()
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
   })
+  const [editingRecord, setEditingRecord] = useState(null)
 
   const load = async (childId) => {
     setLoading(true)
@@ -46,6 +48,12 @@ export default function ParentView({ showToast }) {
 
   const handleFilter = (id) => setFilter(id)
   const handleDeleted = (id) => setRecords(prev => prev.filter(r => r.id !== id))
+  const handleEdit = (record) => setEditingRecord(record)
+  const handleSaveEdit = async (updates) => {
+    await updateRecord(editingRecord.id, updates)
+    await load(filterChild)
+    showToast('記録を更新しました')
+  }
 
   // 月でフィルタリングした記録
   const filteredRecords = records.filter(r => {
@@ -332,6 +340,7 @@ export default function ParentView({ showToast }) {
               record={r}
               childIndex={childIndexMap[r.child_id] ?? 0}
               onDeleted={handleDeleted}
+              onEdited={handleEdit}
               showToast={showToast}
             />
           ))
@@ -343,6 +352,15 @@ export default function ParentView({ showToast }) {
 
       {/* 長期休み設定 */}
       <VacationSettings showToast={showToast} />
+
+      {/* 編集モーダル */}
+      {editingRecord && (
+        <EditRecordModal
+          record={editingRecord}
+          onClose={() => setEditingRecord(null)}
+          onSave={handleSaveEdit}
+        />
+      )}
     </>
   )
 }
