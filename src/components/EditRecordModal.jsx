@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const SUBJECTS = ['国語', '算数・数学', '理科', '社会', '英語', 'その他']
+const SUBJECTS = ['国語', '数学', '理科', '社会', '英語', '音楽', '図工・美術', '体育', 'その他']
 
 function calcDiff(start, end) {
   if (!start || !end) return 0
