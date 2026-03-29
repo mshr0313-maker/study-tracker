@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 const SUBJECTS = ['国語', '数学', '理科', '社会', '英語', '音楽', '図工・美術', '体育', 'その他']
+const STUDY_TYPES = ['宿題', '復習', '予習']
 
 function calcDiff(start, end) {
   if (!start || !end) return 0
@@ -13,6 +14,7 @@ function calcDiff(start, end) {
 
 export default function EditRecordModal({ record, onClose, onSave }) {
   const [subject, setSubject] = useState(record.subject || '')
+  const [studyType, setStudyType] = useState(record.study_type || '')
   const [content, setContent] = useState(record.content || '')
   const [memo, setMemo] = useState(record.memo || '')
   const [startTime, setStartTime] = useState(record.start_time || '')
@@ -32,10 +34,15 @@ export default function EditRecordModal({ record, onClose, onSave }) {
       alert('科目と内容は必須です')
       return
     }
+    if (!studyType) {
+      alert('宿題・復習・予習を選択してください')
+      return
+    }
     setSaving(true)
     try {
       await onSave({
         subject,
+        studyType,
         content,
         memo,
         startTime,
@@ -88,6 +95,14 @@ export default function EditRecordModal({ record, onClose, onSave }) {
           <select value={subject} onChange={e => setSubject(e.target.value)}>
             <option value="">選択してください</option>
             {SUBJECTS.map(s => <option key={s} value={s}>{s}</option>)}
+          </select>
+        </div>
+
+        <div className="field">
+          <label>種類 *</label>
+          <select value={studyType} onChange={e => setStudyType(e.target.value)}>
+            <option value="">選択してください</option>
+            {STUDY_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
           </select>
         </div>
 

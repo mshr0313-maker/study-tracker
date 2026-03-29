@@ -355,11 +355,12 @@ export const createRecord = async ({ childId, subject, studyType, content, memo,
   return record
 }
 
-export const updateRecord = async (id, { subject, content, memo, startTime, endTime, durationMin }) => {
+export const updateRecord = async (id, { subject, studyType, content, memo, startTime, endTime, durationMin }) => {
   if (MOCK_MODE) {
     const record = mockRecords.find(r => r.id === id)
     if (record) {
       if (subject !== undefined) record.subject = subject
+      if (studyType !== undefined) record.study_type = studyType
       if (content !== undefined) record.content = content
       if (memo !== undefined) record.memo = memo
       if (startTime !== undefined) record.start_time = startTime
@@ -370,6 +371,7 @@ export const updateRecord = async (id, { subject, content, memo, startTime, endT
   }
   const updates = {}
   if (subject !== undefined) updates.subject = subject
+  if (studyType !== undefined) updates.study_type = studyType || null
   if (content !== undefined) updates.content = content
   if (memo !== undefined) updates.memo = memo || null
   if (startTime !== undefined) updates.start_time = startTime || null
