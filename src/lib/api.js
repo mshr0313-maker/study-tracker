@@ -347,11 +347,28 @@ export const createRecord = async ({ childId, subject, studyType, content, memo,
 
   const { data: record, error } = await supabase
     .from('records')
-    .insert({ child_id: childId, subject, content, memo: memo||null, start_time: startTime||null, end_time: endTime||null, duration_min: durationMin||0 })
-    .select().single()
+    .insert({
+      child_id: childId,
+      subject,
+      study_type: studyType || null,
+      content,
+      memo: memo||null,
+      start_time: startTime||null,
+      end_time: endTime||null,
+      duration_min: durationMin||0
+    })
+    .select('*, children(name)').single()
   if (error) throw error
 
   if (files && files.length > 0) await uploadPhotos(record.id, files)
+
+  // 通知を送信
+  if (typeof window !== 'undefined' && Notification.permission === 'granted') {
+    import('./notifications').then(({ notifyNewRecord }) => {
+      notifyNewRecord(record.children?.name || '子ども', record.subject, record.content)
+    })
+  }
+
   return record
 }
 
@@ -434,6 +451,21 @@ export const addComment = async (recordId, author, body) => {
   const { data, error } = await supabase
     .from('comments').insert({ record_id: recordId, author, body }).select().single()
   if (error) throw error
+
+  // 記録の情報を取得して通知
+  const { data: record } = await supabase
+    .from('records')
+    .select('subject, children(name)')
+    .eq('id', recordId)
+    .single()
+
+  // 通知を送信
+  if (typeof window !== 'undefined' && Notification.permission === 'granted' && record) {
+    import('./notifications').then(({ notifyNewComment }) => {
+      notifyNewComment(record.children?.name || '子ども', author, body)
+    })
+  }
+
   return data
 }
 

@@ -104,10 +104,26 @@ export default function NotificationSettings() {
 
   return (
     <div className="card" style={{ marginBottom: 16 }}>
-      <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 12, color: 'var(--muted)' }}>リマインダー通知</p>
+      <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 12, color: 'var(--muted)' }}>通知設定</p>
+
+      <div style={{ marginBottom: 16, paddingBottom: 12, borderBottom: '1px solid var(--border)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+          <span style={{ fontSize: 14 }}>記録・コメントの通知</span>
+          <button
+            className={`btn btn-sm ${permission === 'granted' ? 'btn-primary' : ''}`}
+            onClick={requestPermission}
+            disabled={permission === 'granted'}
+          >
+            {permission === 'granted' ? '許可済み' : '許可する'}
+          </button>
+        </div>
+        <p style={{ fontSize: 12, color: 'var(--muted)' }}>
+          子どもが記録を追加したりコメントがついたときに通知されます
+        </p>
+      </div>
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-        <span style={{ fontSize: 14 }}>通知を受け取る</span>
+        <span style={{ fontSize: 14 }}>リマインダー通知</span>
         <button
           className={`btn btn-sm ${enabled ? 'btn-primary' : ''}`}
           onClick={handleToggle}
