@@ -147,9 +147,9 @@ export default function ChildView({ showToast, triggerConfetti }) {
             </select>
           </div>
           <div className="field">
-            <label>種類</label>
-            <select value={studyType} onChange={e => setStudyType(e.target.value)}>
-              <option value="">選択</option>
+            <label>種類 *</label>
+            <select value={studyType} onChange={e => setStudyType(e.target.value)} required>
+              <option value="">選択してください</option>
               {STUDY_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
@@ -203,7 +203,7 @@ export default function ChildView({ showToast, triggerConfetti }) {
       {/* 写真 */}
       <div className="card">
         <div className="field" style={{ marginBottom: 0 }}>
-          <label>写真を追加（任意）</label>
+          <label>写真を追加（必須）</label>
           <PhotoUploader previews={previews} onAdd={handleAddPhotos} onRemove={handleRemovePhoto} />
           <p style={{ fontSize: 11, color: 'var(--muted)', marginTop: 8 }}>
             ※写真は1ヶ月後に自動削除されます
